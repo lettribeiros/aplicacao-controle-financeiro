@@ -13,6 +13,35 @@ A aplicação bancária oferece serviços para o gerenciamento de controle finan
 - Java JDK 11 ou superior
 - Maven 3.x
 - Banco de Dados MySQL
+- IDE
+
+#### Banco de dados
+- Fazer download do MySQL Workbench
+- Criar banco de dados
+    ```sql
+        CREATE SCHEMA `bancodedados` ;
+    ```
+
+- Executar Queries para a criação das tabelas
+
+  ```sql
+      CREATE TABLE `categorias` (
+      `idcategoria` int NOT NULL AUTO_INCREMENT,
+      `nomecategoria` varchar(45) NOT NULL,
+      PRIMARY KEY (`idcategoria`)
+        )
+
+    CREATE TABLE `transacoes` (
+      `idtransacao` int NOT NULL AUTO_INCREMENT,
+      `datatransacao` date NOT NULL,
+      `valortransacao` decimal(10,2) NOT NULL,
+      `categoria_idcategoria` int DEFAULT NULL,
+      PRIMARY KEY (`idtransacao`),
+      KEY `fk_transacao_categoria_idx` (`categoria_idcategoria`),
+      CONSTRAINT `fk_transacao_categoria` FOREIGN KEY (`categoria_idcategoria`) REFERENCES `categorias` (`idcategoria`)
+    )
+    ```
+  
 
 #### Instalação e Execução
 
@@ -27,14 +56,23 @@ A aplicação bancária oferece serviços para o gerenciamento de controle finan
     ```bash
     cd aplicacao-controle-financeiro/backend/transacoes
     ```
+
+3. Faça a configuração para a conexão com seu banco de dados.
+
+   Abra o diretório do projeto em um IDE
+       ![Captura de tela 2024-01-30 164209](https://github.com/lettribeiros/aplicacao-controle-financeiro/assets/123602185/1bf340fa-c9ce-4106-bff6-89e7405d62d9)
+   Altere onde está sublinhado pelo nome do banco de dados que foi criado e a senha pela senha que foi cadastrada no MySQL
+
     
 3. Execute a aplicação.
+
+   Acesse o diretório do projeto e execute
 
     ```bash
     mvn spring-boot:run
     ```
 
-4. O backend estará disponível em http://localhost:8080
+5. O backend estará disponível em http://localhost:8080
 
 ### Endpoints da API
 
