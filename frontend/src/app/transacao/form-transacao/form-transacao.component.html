@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <td>Data:</td>
+        <td><input type="date" placeholder="" [(ngModel)]="transacao!.data"/></td>
+    </tr>
+    <tr>
+        <td>Valor:</td>
+        <td><input type="number" placeholder="Insira o valor" [(ngModel)]="transacao!.valor"/></td>
+    </tr>
+    <tr>
+        <td>Categoria:</td>
+        <td>
+            <select name="categoria" id="categoria" [(ngModel)]="transacao.categoria.id" required *ngIf="transacao && transacao.categoria">
+                <option *ngFor="let categoria of listaCategorias" [value]="categoria.id">{{categoria.nome}}</option>
+            </select>
+        </td>
+    </tr>
+</table>
+
+<button (click)="salvar()" *ngIf="!transacao.id">Cadastrar</button>
+<button (click)="alterar()" *ngIf="transacao.id">Alterar</button>
+<button (click)="limpar()">Limpar</button>

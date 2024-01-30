@@ -1,0 +1,70 @@
+
+<div>
+    <h1>Transações</h1>
+    <div class="filtro" *ngIf="temTransacao">
+        <p>Filtro por data:</p>
+        <input type="date" [(ngModel)]="dataFiltro">
+        <button (click)="filtrarTransacoes()">Filtrar</button>
+    </div>
+    <div *ngIf="!temTransacao">
+        <p>No momento não há transações cadastradas!</p>
+    </div>
+    <h3 *ngIf="temTransacao">Todas as transações</h3>
+    <table *ngIf="temTransacao">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data (ano-mês-dia)</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="!filtroAtivo">
+            <tr  *ngFor="let transacao of listaTransacoes; index as i">
+                <td>{{transacao.id}}</td>
+                <td>{{transacao.data}}</td>
+                <td>{{transacao.valor}}</td>
+                <td>{{transacao.categoria?.nome}}</td>
+                <td>
+                    <button (click)="selecionaTransacao(transacao)">Alterar</button>
+                    <button (click)="deletarTransacaoSelecionada(transacao.id)">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="filtroAtivo">
+            <tr  *ngFor="let transacao of listaTransacoesPorData; index as i">
+                <td>{{transacao.id}}</td>
+                <td>{{transacao.data}}</td>
+                <td>{{transacao.valor}}</td>
+                <td>{{transacao.categoria?.nome}}</td>
+                <td>
+                    <button (click)="selecionaTransacao(transacao)">Alterar</button>
+                    <button (click)="deletarTransacaoSelecionada(transacao.id)">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button *ngIf="temTransacao" (click)="deletarTodasAsTransacoes()">Excluir todas as transações</button>
+</div>
+<div>
+    <h3>Cadastrar transação</h3>
+    <app-form-transacao [transacao]="transacaoSelecionada" (statusParaAtualizacao)="listarTodasTransacoes()"></app-form-transacao>
+</div>
+<div>
+    <h3>Resumo dos gastos por categoria</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Valor Total Gasto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let categoria of listaCategorias; index as i">
+                <td>{{categoria.nome}}</td>
+                <td>{{valorTotalCategoria(categoria.nome)}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
