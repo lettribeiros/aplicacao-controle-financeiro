@@ -54,7 +54,7 @@ A aplicação bancária oferece serviços para o gerenciamento de controle finan
 2. Acesse o diretório do projeto.
 
     ```bash
-    cd aplicacao-controle-financeiro/backend/transacoes
+    cd aplicacao-controle-financeiro/backend
     ```
 
 3. Faça a configuração para a conexão com seu banco de dados.
