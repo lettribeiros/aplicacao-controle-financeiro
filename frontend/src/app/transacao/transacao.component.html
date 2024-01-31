@@ -8,6 +8,7 @@
     </div>
     <div *ngIf="!temTransacao">
         <p>No momento não há transações cadastradas!</p>
+        <button (click)="listarTodasTransacoes()">Voltar</button>
     </div>
     <h3 *ngIf="temTransacao">Todas as transações</h3>
     <table *ngIf="temTransacao">
@@ -44,7 +45,8 @@
             </tr>
         </tbody>
     </table>
-    <button *ngIf="temTransacao" (click)="deletarTodasAsTransacoes()">Excluir todas as transações</button>
+    <button *ngIf="filtroAtivo" (click)="listarTodasTransacoes()">Voltar</button>
+    <button *ngIf="temTransacao && !filtroAtivo" (click)="deletarTodasAsTransacoes()">Excluir todas as transações</button>
 </div>
 <div>
     <h3>Cadastrar transação</h3>

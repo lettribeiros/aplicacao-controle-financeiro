@@ -38,6 +38,8 @@ export class TransacaoComponent implements OnInit{
           this.temTransacao = false;
         }
         this.listaTransacoes = resposta;
+        this.filtroAtivo = false;
+        this.temTransacao = true;
       },
       (erro) => {
         console.log(erro);
